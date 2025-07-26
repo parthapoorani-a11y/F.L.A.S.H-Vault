@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>F.L.A.S.H. Vault | Kishore</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <style>
+    body { background: #111; color: #eee; font-family: sans-serif; padding: 20px; }
+    h1 { color: #00f7ff; text-shadow: 0 0 8px #00f7ff; }
+    #editor { background: #222; padding: 1rem; min-height: 200px; margin-top: 1rem; border: 2px solid #00f7ff; }
+    input, button { padding: 10px; font-size: 1rem; margin: 0.5rem 0; }
+    button { background: #00f7ff; color: #000; font-weight: bold; border: none; }
+  </style>
+</head>
+<body>
+
+  <h1>F.L.A.S.H. Vault 🔐</h1>
+  <p>Only Kishore can edit this. Powered by science, destined for space.</p>
+
+  <div id="lock">
+    <input type="password" id="password" placeholder="Enter password">
+    <button onclick="unlock()">Unlock</button>
+  </div>
+
+  <div id="vault" style="display:none;">
+    <div id="editor" contenteditable="true">🧠 Your classified ideas here...</div>
+    <button onclick="save()">💾 Save</button>
+    <button onclick="lock()">🔒 Lock</button>
+  </div>
+
+  <script>
+    const correctPassword = "flash42"; // Change this bro
+
+    function unlock() {
+      const input = document.getElementById("password").value;
+      if (input === correctPassword) {
+        document.getElementById("lock").style.display = "none";
+        document.getElementById("vault").style.display = "block";
+        const saved = localStorage.getItem("flashVault");
+        if (saved) {
+          document.getElementById("editor").innerText = saved;
+        }
+      } else {
+        alert("Nope. You ain't Kishore.");
+      }
+    }
+
+    function save() {
+      const content = document.getElementById("editor").innerText;
+      localStorage.setItem("flashVault", content);
+      alert("💾 Saved to browser storage");
+    }
+
+    function lock() {
+      document.getElementById("vault").style.display = "none";
+      document.getElementById("lock").style.display = "block";
+      document.getElementById("password").value = "";
+    }
+  </script>
+
+</body>
+    </html>
